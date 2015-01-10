@@ -30,15 +30,41 @@ var projects = {
 			"title": "project 1",
 			"dates": "2000 - 2001",
 			"description": "description of project 1",
-			"images": [ "images/project1a.jpg", "images/project1b.jpg" ]
+			"images": [ "http://placehold.it/50x50", "http://placehold.it/150x50" ]
 		},
 		{
 			"title": "project 2",
 			"dates": "2002 - 2003",
 			"description": "description of project 2",
-			"images": [ "images/project2a.jpg", "images/project2b.jpg" ]
+			"images": []
+		},
+		{
+			"title": "project 3",
+			"dates": "2004",
+			"description": "description of project 3",
+			"images": [ "http://placehold.it/50x50", "http://placehold.it/150x50" ]
 		}
-	]
+	],
+	"display": function() {
+		//console.log("invoked projects.display");
+		for (var myProj in projects.projects) {
+			//console.log("iterate through list of projects");
+			$("#projects").append(HTMLprojectStart);
+			var fmtTitle = HTMLprojectTitle.replace("%data%", projects.projects[myProj].title);
+			//var fmtTitle = HTMLprojectTitle.replace("%data%", "some title");
+			//console.log(fmtTitle);
+			var fmtDates = HTMLprojectDates.replace("%data%", projects.projects[myProj].dates);
+			var fmtDescr = HTMLprojectDescription.replace("%data%", projects.projects[myProj].description);
+
+			var fmtImages = "";
+			if (projects.projects[myProj].images.length > 0) {
+				for (var img in projects.projects[myProj].images) {
+					var fmtImages = fmtImages + HTMLprojectImage.replace("%data%", projects.projects[myProj].images[img]);
+				}
+			}
+			$(".project-entry:last").append(fmtTitle + fmtDates + fmtDescr + fmtImages);
+		}
+	}
 };
 
 
@@ -59,7 +85,7 @@ var bio = {
 	"welcomeMessage" : "Welcome to my interactive resume",
 	"contacts" : contacts,
 	"skills" : skills,
-	"bioPic" : "formattedBioPic"
+	"bioPic" : "images/biopic.png"
 };
 
 var education = {
@@ -104,6 +130,11 @@ $("#topContacts").append(HTMLgithub.replace("%data%", contacts.github));
 $("#topContacts").append(HTMLtwitter.replace("%data%", contacts.twitter));
 $("#topContacts").append(HTMLlocation.replace("%data%", contacts.location));
 
+// adding bioPic not covered in course
+$("#header").append(HTMLbioPic.replace("%data%", bio.bioPic));
+// adding welcomeMessage not covered in course
+$("#header").append(HTMLWelcomeMsg.replace("%data%", bio.welcomeMessage));
+
 
 if (bio.skills.length > 0) {
 	$("#header").append(HTMLskillsStart);
@@ -117,18 +148,63 @@ if (bio.skills.length > 0) {
 }
 
 
-for (job in work.jobs) {
-	$("#workExperience").append(HTMLworkStart);
-	var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
-	//console.log(formattedEmployer);
-	var formattedTitle = HTMLworkTitle.replace("%data%", work.jobs[job].title);
-	//console.log(formattedTitle);
-	var combo = formattedEmployer + formattedTitle;
-	//console.log(combo);
-	//$(".work-entry:last").append(combo);
-	var formattedLocation = HTMLworkLocation.replace("%data%", work.jobs[job].location);
-	var formattedDates = HTMLworkDates.replace("%data%", work.jobs[job].dates);
-	var formattedDescription = HTMLworkDescription.replace("%data%", work.jobs[job].description);
+var displayWork = function() {
 
-	$(".work-entry:last").append(formattedEmployer + formattedTitle + formattedLocation + formattedDates + formattedDescription);
+	for (job in work.jobs) {
+		$("#workExperience").append(HTMLworkStart);
+		var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
+		//console.log(formattedEmployer);
+		var formattedTitle = HTMLworkTitle.replace("%data%", work.jobs[job].title);
+		//console.log(formattedTitle);
+		var combo = formattedEmployer + formattedTitle;
+		//console.log(combo);
+		//$(".work-entry:last").append(combo);
+		var formattedLocation = HTMLworkLocation.replace("%data%", work.jobs[job].location);
+		var formattedDates = HTMLworkDates.replace("%data%", work.jobs[job].dates);
+		var formattedDescription = HTMLworkDescription.replace("%data%", work.jobs[job].description);
+
+		$(".work-entry:last").append(formattedEmployer + formattedTitle + formattedLocation + formattedDates + formattedDescription);
+	}
 }
+
+displayWork();
+
+$(document).click(function(loc) {
+  logClicks(loc.pageX, loc.pageY);
+});
+
+
+// quiz
+function locationizer(work_obj) {
+	var myLocs = [];
+
+	//for (job in work_obj.jobs) { // without the var, job is global
+	for (var job in work_obj.jobs) {
+		console.log(work_obj.jobs[job].location);
+		myLocs.push(work_obj.jobs[job].location);
+	}
+	return myLocs;
+}
+
+//console.log(locationizer(work));
+
+
+// Internationalize Names Quiz
+$("#main").append(internationalizeButton);
+
+function inName(fullName) {
+	var elements = fullName.split(" ");
+	elements[0] = elements[0].toLowerCase();
+	elements[1] = elements[1].toUpperCase();
+	elements[0] = elements[0].slice(0,1).toUpperCase() + elements[0].slice(1);
+	var intlName = elements[0] + " " + elements[1];
+
+	return intlName;
+}
+//console.log(inName("sebastian thrun"));
+
+
+// encapsulating functions quiz
+projects.display();
+
+$("#mapDiv").append(googleMap);
