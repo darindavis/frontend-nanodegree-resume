@@ -1,0 +1,11 @@
+Udacity courses on Javascript and jQuery
+
+P2 cannot show education correctly
+https://piazza.com/class/i23vpy8h7l27la?cid=545
+
+Making Skills List Vertical
+https://piazza.com/class/i23vpy8h7l27la?cid=415
+
+http://css-tricks.com/snippets/css/a-guide-to-flexbox/
+
+http://stackoverflow.com/questions/5417356/inherit-css-class
