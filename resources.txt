@@ -9,3 +9,9 @@ https://piazza.com/class/i23vpy8h7l27la?cid=415
 http://css-tricks.com/snippets/css/a-guide-to-flexbox/
 
 http://stackoverflow.com/questions/5417356/inherit-css-class
+
+Bug in services.textSearch()?
+https://piazza.com/class/i23vpy8h7l27la?cid=554
+
+setTimeout()
+http://www.w3schools.com/js/js_timing.asp

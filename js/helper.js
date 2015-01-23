@@ -180,15 +180,6 @@ function initializeMap() {
     map.setCenter(bounds.getCenter());
   }
 
-  /*
-  callback(results, status) makes sure the search returned results for a location.
-  If so, it creates a new map marker for that location.
-  */
-  function callback(results, status) {
-    if (status == google.maps.places.PlacesServiceStatus.OK) {
-      createMapMarker(results[0]);
-    }
-  }
 
   /*
   pinPoster(locations) takes in the array of locations created by locationFinder()
@@ -202,7 +193,7 @@ function initializeMap() {
 
     // Iterates through the array of locations, creates a search object for each location
     for (var place in locations) {
-      //console.log("pinPoster() processing " + locations[place])
+      console.log("pinPoster() processing " + locations[place])
       // the search request object
       var request = {
         query: locations[place]
@@ -211,6 +202,20 @@ function initializeMap() {
       // Actually searches the Google Maps API for location data and runs the callback
       // function with the search results after each search.
       service.textSearch(request, callback);
+    }
+
+    /*
+    callback(results, status) makes sure the search returned results for a location.
+    If so, it creates a new map marker for that location.
+    */
+    function callback(results, status) {
+      if (status == google.maps.places.PlacesServiceStatus.OK) {
+        createMapMarker(results[0]);
+      }
+      else {
+        console.log("callback(): " + status);
+        setTimeout(service.textSearch(request, callback), 1000);
+      }
     }
   }
 

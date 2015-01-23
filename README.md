@@ -25,7 +25,7 @@ the course materials.
 
 * URL added to work.jobs array entries, and linked to employer name
 * URL added to projects.projects array entries, and linked to project title
-* Locations for projects are pinned to the Google map. Note: There appears to be a bug in services.textSearch() because the last project location isn't pinned).
+* Locations for projects are pinned to the Google map.
 
 
 ## INTERACTIVE FEATURES
@@ -46,13 +46,14 @@ I used the following resources to complete the project:
 
 * Udacity courses on Javascript and jQuery
 
-* P2 cannot show education correctly, 
-https://piazza.com/class/i23vpy8h7l27la?cid=545
+* P2 cannot show education correctly, https://piazza.com/class/i23vpy8h7l27la?cid=545
 
-* Making Skills List Vertical, 
-https://piazza.com/class/i23vpy8h7l27la?cid=415
+* Making Skills List Vertical, https://piazza.com/class/i23vpy8h7l27la?cid=415
 
 * http://css-tricks.com/snippets/css/a-guide-to-flexbox/
 
 * http://stackoverflow.com/questions/5417356/inherit-css-class
 
+* Bug in services.textSearch()?, https://piazza.com/class/i23vpy8h7l27la?cid=554
+
+* setTimeout(), http://www.w3schools.com/js/js_timing.asp

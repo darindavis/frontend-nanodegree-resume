@@ -127,7 +127,7 @@ var projects = {
 			"description": "DNS/DHCP TSP (Technology Selection Process)",
 			"images": [ "images/JPMC-bldg-sign.jpg", "images/Lower_Manhattan_from_Helicopter.jpg"],
 			"url": "http://www.jpmorganchase.com",
-			"location": "New York City, New York" // This is not be pinned to the Google map because there is a bug in services.textSearch (the last location isn't pinned).
+			"location": "New York City, New York"
 		}
 	],
 	"display": function() {
