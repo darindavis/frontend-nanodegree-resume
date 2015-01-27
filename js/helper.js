@@ -201,21 +201,39 @@ function initializeMap() {
 
       // Actually searches the Google Maps API for location data and runs the callback
       // function with the search results after each search.
-      service.textSearch(request, callback);
+      callService_textSearch(request);
     }
 
     /*
     callback(results, status) makes sure the search returned results for a location.
     If so, it creates a new map marker for that location.
     */
-    function callback(results, status) {
-      if (status == google.maps.places.PlacesServiceStatus.OK) {
-        createMapMarker(results[0]);
-      }
-      else {
-        console.log("callback(): " + status);
-        setTimeout(service.textSearch(request, callback), 1000);
-      }
+    function callService_textSearch(request) {
+      /* From https://piazza.com/class/i23vpy8h7l27la?cid=554 */
+      /* Creating a closure to make sure we create a copy of request that's being iterated in the pinPoster For loop */
+
+      // Actually searches the Google Maps API for location data and runs the callback
+      // function with the search results after each search.
+      service.textSearch(request, function(results,status) {
+
+        /*
+        anonymous function makes sure the search returned results for a location.
+        If so, it creates a new map marker for that location.
+        */
+
+        if (status == google.maps.places.PlacesServiceStatus.OK) {
+          createMapMarker(results[0]);
+        } else if(status == google.maps.places.PlacesServiceStatus.OVER_QUERY_LIMIT) {
+          console.log(status);
+          setTimeout(function() {
+            callService_textSearch(request);
+           }, 500
+          );
+        } else {
+          console.log(status);
+        }
+       }
+      );
     }
   }
 
